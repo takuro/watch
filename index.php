@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+  require_once 'php/init.php';
+  require_once 'php/passport.php';
+  require_once 'php/movie.php';
+  $movie = new Movie();
+  $movie->refresh();
+?>
+  <title><?php echo SITE_NAME; ?></title>
+	<link href="styles/bootstrap.min.css" rel="stylesheet" />
+	<link href="styles/bootstrap-responsive.min.css" rel="stylesheet" />
+  <link href="vendor/MediaElement/build/mediaelementplayer.min.css" rel="stylesheet" />
+	<link href="styles/user.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <header id="page-header">
+      <h1><?php echo SITE_NAME; ?></h1>
+    </header>
+
+    <section id="movies" class="row">
+    <?php
+      $count = 1;
+      foreach ($movie->find_all() as $m) {
+        echo '<div class="span2">';
+        echo '  <a class="movie-action" data-movie-id="'.$m['id'].'"';
+        echo '     data-movie-title="'.$m['title'].'" id="movie-'.$m['id'].'">';
+        echo      $m['title'];
+        echo '  </a>';
+        echo '</div>';
+      }
+    ?>
+    </section>
+
+    <section id="movie-package">
+      <div id="screen">
+        <video width="720" height="480" controls autobuffer preload="none">
+          <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+          <source id="for-mp4-screen" type="video/mp4" src="" />
+          <!-- Optional: Add subtitles for each language -->
+          <track kind="subtitles" src="" srclang="en" />
+          <!-- Optional: Add chapters -->
+          <track kind="chapters" src="" srclang="en" /> 
+          <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
+          <object width="720" height="480" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+              <param name="movie" value="vendor/MediaElement/build/flashmediaelement.swf" />
+              <param name="flashvars" value="controls=true&file=" />
+          </object>
+        </video>
+      </div>
+    </section>
+
+    <section class="modal fade" id="movie-info">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3></h3>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-condensed">
+          <tr>
+            <th>Title</th>
+            <td id="movie-title" class="edittable"></td>
+          </tr>
+          <tr>
+            <th>Genre</th>
+            <td id="movie-genre" class="edittable"></td>
+          </tr>
+          <tr>
+            <th>Series</th>
+            <td id="movie-series" class="edittable"></td>
+          </tr>
+          <tr>
+            <th>Part Number</th>
+            <td id="movie-part-number" class="edittable"></td>
+          </tr>
+          <tr>
+            <th>Year</th>
+            <td id="movie-year" class="edittable"></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td id="movie-description" class="edittable-textarea"></td>
+          </tr>
+        </table>
+        <div id="view">
+          <a class="btn btn-primary" id="watch-movie" data-dismiss="modal">Watch</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal">Close</a>
+      </div>
+    </section>
+    
+    <footer id="page-footer">
+      <a href="/index.php?session=logout">Logout</a>
+      <?php echo '&copy; '.date('Y').' '.SITE_NAME; ?>
+    </footer>
+
+  </div>
+	
+	<!-- JavaScript Area -->
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="vendor/MediaElement/build/mediaelement-and-player.min.js"></script>
+	<script src="js/jquery.editinplace.js"></script>
+	<script src="js/user.js"></script>
+	<!-- JavaScript Area -->
+  <!-- Do not write anything below this. -->
+</body>
+</html>

@@ -1,0 +1,64 @@
+a {
+  -webkit-transition: color linear 0.3s;
+  -moz-transition: color linear 0.3s;
+  -o-transition: color linear 0.3s;
+  transition: color linear 0.3s;
+  display: inline-block;
+  padding: 3px;
+  padding-left: 0;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  } a:hover {
+    text-decoration: none;
+  } a:hover, a:active {
+    outline: none
+}
+
+ul {
+  list-style: none;
+}
+
+.table th,
+.table td {
+  padding: 5px;
+  vertical-align: middle;
+}
+
+.table input,
+.table textarea {
+  margin-bottom: 0;
+}
+
+#login-form,
+#signup-form {
+  margin-top: 30px;
+
+  } #login-form h1,
+    #signup-form h1 {
+      font-weight: normal;
+      margin-bottom: 5px;
+}
+
+#page-header {
+  border-bottom: 1px solid #EEEEEE;
+  margin: 18px 0;
+  padding-bottom: 17px;
+}
+
+#page-footer {
+  border-top: 1px solid #EEEEEE;
+  margin: 18px 0;
+  padding-top: 17px;
+  font-size: 0.9em;
+  color: #999;
+  text-align: right;
+}
+
+#screen {
+  text-align: center;
+}
+
+#movie-package {
+  display: none;
+}

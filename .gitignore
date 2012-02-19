@@ -1,0 +1,4 @@
+*.swp
+cache/*
+robots.txt
+*.sqlite3
