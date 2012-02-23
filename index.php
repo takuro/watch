@@ -8,6 +8,7 @@
   require_once 'php/init.php';
   require_once 'php/passport.php';
   require_once 'php/movie.php';
+  require_once 'php/show.php';
   $movie = new Movie();
   $movie->refresh();
 ?>
@@ -30,7 +31,7 @@
       foreach ($movie->find_all() as $m) {
         echo '<div class="span2">';
         echo '  <a class="movie-action" data-movie-id="'.$m['id'].'"';
-        echo '     data-movie-title="'.$m['title'].'" id="movie-'.$m['id'].'">';
+        echo '     data-movie-title="'.$m['title'].' '.$m['part_number'].'" id="movie-'.$m['id'].'">';
         echo      $m['title'];
         echo '  </a>';
         echo '</div>';
@@ -48,15 +49,18 @@
           <!-- Optional: Add chapters -->
           <track kind="chapters" src="" srclang="en" /> 
           <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
-          <object width="720" height="480" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+          <object width="720" height="480" type="application/x-shockwave-flash" data="vendor/MediaElement/build/flashmediaelement.swf">
               <param name="movie" value="vendor/MediaElement/build/flashmediaelement.swf" />
               <param name="flashvars" value="controls=true&file=" />
           </object>
         </video>
       </div>
+      <nav>
+        <a id="return">Return</a>
+      </nav>
     </section>
 
-    <section class="modal fade" id="movie-info">
+    <section class="modal fade" id="movie-info" data-movie-id="">
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3></h3>
@@ -65,23 +69,23 @@
         <table class="table table-bordered table-condensed">
           <tr>
             <th>Title</th>
-            <td id="movie-title" class="edittable"></td>
+            <td id="movie-title" class="edittable modal-movie-title" data-movie-title=""></td>
           </tr>
           <tr>
             <th>Genre</th>
-            <td id="movie-genre" class="edittable"></td>
+            <td id="movie-genre" class="edittable modal-movie-genre" data-movie-genre=""></td>
           </tr>
           <tr>
             <th>Series</th>
-            <td id="movie-series" class="edittable"></td>
+            <td id="movie-series" class="edittable modal-movie-series" data-movie-series=""></td>
           </tr>
           <tr>
             <th>Part Number</th>
-            <td id="movie-part-number" class="edittable"></td>
+            <td id="movie-part-number" class="edittable modal-movie-part-number" data-movie-part-number=""></td>
           </tr>
           <tr>
             <th>Year</th>
-            <td id="movie-year" class="edittable"></td>
+            <td id="movie-year" class="edittable modal-movie-year" data-movie-year=""></td>
           </tr>
           <tr>
             <th>Description</th>

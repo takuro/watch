@@ -102,13 +102,4 @@
     $db->close();
   }
 
-  // cache directory check
-  define('CACHE', APP_ROOT.'/cache');
-  if (!file_exists(CACHE)) {
-    die('Fatal error : '.CACHE.' is not exist.');
-  }
-
-  if (!is_writable(CACHE)) {
-    die('Fatal error : Permission denied. ( '.CACHE.' )');
-  }
 ?>

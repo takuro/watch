@@ -17,8 +17,9 @@ class Response {
       $this->go_to_index(); return;
     case 'json':
       $this->json($msg); return;
-    case 403: r403(); return;
-    case 404: r404(); return;
+    case 200: $this->r200(); return;
+    case 403: $this->r403(); return;
+    case 404: $this->r404(); return;
     default:
       fatal_error(); return;
     }
@@ -55,6 +56,11 @@ class Response {
   public static function r404() {
     header('HTTP/1.0 404 Not Found');
     die('404 Not Found');
+  }
+
+  public static function r200() {
+    header('HTTP/1.0 200 OK');
+    die('200 OK');
   }
 
 }

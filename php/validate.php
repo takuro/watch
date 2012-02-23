@@ -56,7 +56,7 @@ class Validate {
   public static function meta_data($data) {
     // empty check
     if (empty($data['element_id'])) { return false; }
-    if (empty($data['update_value'])) { return false; }
+    if (empty($data['update_value'])) { $data['update_value'] = ''; }
 
     // cleanup
     $element_id = trim($data['element_id']);

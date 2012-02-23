@@ -56,9 +56,19 @@ ul {
 }
 
 #screen {
-  text-align: center;
 }
 
 #movie-package {
   display: none;
+  } #movie-package nav{
+  text-align:right;
 }
+
+.mejs-container {
+  margin: 0 auto;
+}
+
+.modal {
+  display: none;
+}
+

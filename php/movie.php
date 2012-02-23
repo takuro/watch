@@ -69,7 +69,6 @@ class Movie {
   }
 
   public function get_meta_data($movies_id) {
-
     $movies_id = Validate::movies_id($movies_id);
     if (!$movies_id) { Response::r403(); }
 
@@ -78,6 +77,15 @@ class Movie {
     $r = $this->db->select($sql);
     Response::json($r[0]);
     return;
+  }
+
+  public function set_meta_data_to_file($movies_id) {
+    $movies_id = Validate::movies_id($movies_id);
+    if (!$movies_id) { Response::r403(); }
+
+    //$movie = $this->find_by_id($movies_id);
+    //$this->set_meta_data_use_ffmpeg_cmd($movie);
+    return true;
   }
 
   // -- private line --
@@ -122,6 +130,20 @@ class Movie {
     return $movie_path;
   }
 
+  private function set_meta_data_use_ffmpeg_cmd($d) {
+    $cmd  = 'ffmpeg -y -i "'.$d['path'].'" ';
+    $cmd .= '-metadata title="'.$d['title'].'" ';
+    $cmd .= '-metadata comment="'.$d['description'].'" ';
+    $cmd .= '-metadata description="'.$d['description'].'" ';
+    $cmd .= '-metadata album="'.$d['series'].'" ';
+    $cmd .= '-metadata year="'.$d['year'].'" ';
+    $cmd .= '-metadata track="'.$d['part_number'].'" ';
+    $cmd .= '-metadata part_number="'.$d['part_number'].'" ';
+    $cmd .= '-metadata genre="'.$d['genre'].'" ';
+    $cmd .= '-metadata date_written="'.date('r').'" ';
+    shell_exec($cmd);
+    return true;
+  }
 
 }
 ?>
