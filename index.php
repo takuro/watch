@@ -30,9 +30,10 @@
       $count = 1;
       foreach ($movie->find_all() as $m) {
         echo '<div class="span2 movie">';
-        echo '  <a class="movie-action" data-movie-id="'.$m['id'].'"';
-        echo '     data-movie-title="'.$m['title'].' '.$m['part_number'].'" id="movie-'.$m['id'].'">';
-        echo      $m['title'].' '.$m['part_number'];
+        echo '  <a class="movie-action" data-movie-id="'.h($m['id']).'"';
+        echo '     data-movie-title="'.h($m['title']).' '.h($m['part_number']).'"';
+        echo '     id="movie-'.h($m['id']).'">';
+        echo      h($m['title']).' '.h($m['part_number']);
         echo '  </a>';
         echo '</div>';
       }
@@ -64,7 +65,7 @@
     <section class="modal fade" id="movie-info" data-movie-id="">
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3></h3>
+        <h3>Movie Info</h3>
       </div>
       <div class="modal-body">
         <table class="table table-bordered table-condensed">

@@ -49,9 +49,13 @@ if (!empty($_GET['session'])){
 
 } else if (!empty($_POST['signup'])) {
 
-  // from sign up form
-  $user = new User();
-  $user->signup($_POST);
+  if (ALLOW_NEW_USER) {
+    // from sign up form
+    $user = new User();
+    $user->signup($_POST);
+  } else {
+    $response->call('go_to_login_form');
+  }
 
 } else if (!empty($_POST['edit'])) {
 

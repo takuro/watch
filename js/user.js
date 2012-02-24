@@ -3,16 +3,9 @@ $(function(){
   var player = new MediaElementPlayer('video,audio');
 
   $('.edittable').editInPlace({
-    url: "php/passport.php?test=test",
+    url: "php/passport.php",
     params: "edit=movie_info",
     saving_image: "../images/ajax-loader.gif",
-    success : function() {
-      var movie_id = $('#movie-info').attr('data-movie-id', movie_id);
-      var title = $('.modal-movie-title').text();
-      var part_number = $('.modal-movie-part-number').text();
-      $('#movie-info h3').html(title + ' ' + part_number);
-      $('#movie-' + movie_id).html(title);
-    }
   });
 
   $('.edittable-textarea').editInPlace({
@@ -26,7 +19,7 @@ $(function(){
   $('.movie-action').on('click', function(){
     var movie_id = $(this).attr('data-movie-id');
     var movie_title = $(this).attr('data-movie-title');
-    $('#movie-info h3').html(movie_title);
+    //$('#movie-info h3').html(movie_title);
 
     $('#movie-info').attr('data-movie-id', movie_id);
     $('.modal-movie-title').attr('id', 'movie-title_'+movie_id);

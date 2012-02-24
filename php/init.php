@@ -4,7 +4,8 @@
   define('APP_ROOT', get_app_root_dir());
 
   // locale
-  setlocale(LC_ALL, 'ja_JP.UTF-8');
+  define('CHARSET', 'UTF-8');
+  setlocale(LC_ALL, 'ja_JP.'.CHARSET);
 
   /* ---------------------------------------- *
    *  Customizable values 
@@ -92,6 +93,10 @@
     } else {
       return realpath('../');
     }
+  }
+
+  function h($string) {
+    return htmlentities($string, ENT_NOQUOTES, CHARSET);
   }
 
   /* ---------------------------------------- *

@@ -20,14 +20,14 @@ class Movie {
     $movie_path = $this->get_exists_movies_path();
 
     $columns = 'path,ext,title,is_exist,created_at';
-    foreach ($movie_path as $movie) {
-      if (!$this->find_by_path($movie)) {
-        $path = pathinfo($movie);
-        $title = $path['filename'];
-        $ext = $path['extension'];
+    foreach ($movie_path as $path) {
+      if (!$this->find_by_path($path)) {
+        $path_info = pathinfo($path);
+        $title = $path_info['filename'];
+        $ext = $path_info['extension'];
         $date = "datetime('now','localtime')";
-        $sql  = "INSERT INTO movies (".$columns.") VALUES";
-        $sql .= "('".$movie."','".$ext."','".$title."',1,".$date.");";
+        $sql  = sprintf("INSERT INTO movies (".$columns.") VALUES ('%s','%s','%s',1,".$date.");",
+                        $this->db->escape($path),$this->db->escape($ext),$this->db->escape($title));
         $this->db->query($sql);
       }
     }
@@ -38,7 +38,7 @@ class Movie {
   }
 
   public function find_by_path($path) {
-    $sql = "SELECT * from movies WHERE path = '".$this->db->escape($path)."';";
+    $sql = sprintf("SELECT * from movies WHERE path = '%s';", $this->db->escape($path));
     $r = $this->db->select($sql);
     return $r[0];
   }
@@ -60,22 +60,33 @@ class Movie {
 
   public function set_meta_data($data) {
     $meta_data = Validate::meta_data($data);
-    $sql  = "UPDATE movies SET ".$meta_data['row'];
-    $sql .= "='".$this->db->escape($meta_data['update_value'])."' ";
-    $sql .= "WHERE id=".$meta_data['id'].';';
+    if (!$meta_data) { Response::r403(); }
+
+    $sql = sprintf("UPDATE movies SET ".$meta_data['row']."='%s' WHERE id=%d;",
+                    $this->db->escape($meta_data['update_value']), $meta_data['id']);
     $r = $this->db->query($sql, false);
     if (!$r) { Response::r403(); }
-    return $meta_data['update_value'];
+
+    return h($meta_data['update_value']);
   }
 
   public function get_meta_data($movies_id) {
     $movies_id = Validate::movies_id($movies_id);
     if (!$movies_id) { Response::r403(); }
 
-    $sql  = "SELECT title,genre,series,part_number,year,description ";
-    $sql .= "FROM movies WHERE id=".$movies_id.";";
+    $sql = sprintf("SELECT title,genre,series,part_number,year,description FROM movies WHERE id=%d;",$movies_id);
     $r = $this->db->select($sql);
-    Response::json($r[0]);
+
+    $data = array(
+      'title' => h($r[0]['title']),
+      'genre' => h($r[0]['genre']),
+      'series' => h($r[0]['series']),
+      'part_number' => h($r[0]['part_number']),
+      'year' => h($r[0]['year']),
+      'description' => h($r[0]['description'])
+    );
+
+    Response::json($data);
     return;
   }
 

@@ -16,8 +16,7 @@ class Session {
   public function add($users_id) {
     $session_id = $this->create_session_id();
 
-    $sql  = 'INSERT INTO sessions (users_id, session_id) VALUES';
-    $sql .= "(".$users_id.",'".$session_id."');";
+    $sql = sprintf("INSERT INTO sessions (users_id, session_id) VALUES (%d, '%s');", $users_id, $session_id);
     $r = $this->db->query($sql);
 
     if ($r) {
@@ -29,13 +28,13 @@ class Session {
   }
 
   public function find_by_session_id($session_id) {
-    $sql = "SELECT * FROM sessions WHERE session_id = '".$this->db->escape($session_id)."';";
+    $sql = sprintf("SELECT * FROM sessions WHERE session_id='%s';", $this->db->escape($session_id));
     return $this->db->select($sql);
   }
 
   public function delete_by_session_id($session_id) {
-    $sql = "DELETE FROM sessions WHERE session_id = '".$this->db->escape($session_id)."';";
-    return $this->db->select($sql);
+    $sql = sprintf("DELETE FROM sessions WHERE session_id='%s';", $this->db->escape($session_id));
+    return $this->db->query($sql);
   }
 
   public function has_session() {

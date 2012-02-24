@@ -22,16 +22,16 @@ class User {
     }
 
     // add user
-    $uname = $this->db->escape($data['new-uname']);
     $salt = $this->create_salt();
     $password = $this->hashed($data['new-password'], $salt);
     $date = "datetime('now','localtime')";
-    $sql  = 'INSERT INTO users (uname, password, salt, created_at) VALUES';
-    $sql .= "('".$uname."','".$password."','".$salt."',".$date.")";
+
+    $sql = sprintf("INSERT INTO users (uname, password, salt, created_at) VALUES ('%s','%s','%s',".$date.")",
+                    $this->db->escape($data['new-uname']), $password, $salt);
     $r = $this->db->query($sql);
 
     if ($r) {
-      $r = $this->find_by_uname($uname);
+      $r = $this->find_by_uname($data['new-uname']);
       $id = $r[0]['id'];
       $this->session->authed($id);
       return true;
@@ -67,12 +67,12 @@ class User {
   }
 
   public function find_by_uname($uname) {
-    $sql = "SELECT * from users WHERE uname = '".$this->db->escape($uname)."';";
+    $sql = sprintf("SELECT * from users WHERE uname = '%s';", $this->db->escape($uname));
     return $this->db->select($sql);
   }
 
   public function find_by_id($id) {
-    $sql = "SELECT * from users WHERE id = '".intval($id)."';";
+    $sql = sprintf("SELECT * from users WHERE id=%d;", intval($id));
     $r = $this->db->select($sql);
     return $r[0];
   }
