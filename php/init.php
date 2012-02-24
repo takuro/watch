@@ -49,12 +49,12 @@
   define('MOVIE_WIDTH', '720');
   define('MOVIE_HEIGHT', '480');
 
+  // directory of database
+  define('DB_DIR', APP_ROOT.'/db');
+
   /* ---------------------------------------- *
    *  Do not modify anything below this.
    * ---------------------------------------- */
-
-  // directory of database
-  define('DB_DIR', APP_ROOT.'/db');
 
   if (!file_exists(DB_DIR)) {
     die('Fatal error : '.DB_DIR.' is not exist.');

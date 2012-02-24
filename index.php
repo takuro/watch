@@ -100,7 +100,7 @@
     </section>
     
     <footer id="page-footer">
-      <a href="/index.php?session=logout">Logout</a>
+      <a href="index.php?session=logout">Logout</a>
       <?php echo '&copy; '.date('Y').' '.SITE_NAME; ?>
     </footer>
 
