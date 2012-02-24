@@ -9,7 +9,7 @@ require_once 'show.php';
 
 $response = new Response();
 $session = new Session();
-$self = $_SERVER['PHP_SELF'];
+$self = $_SERVER['SCRIPT_FILENAME'];
 
 if (!empty($_GET['session'])){
 
@@ -72,13 +72,13 @@ if (!empty($_GET['session'])){
 } else if ($session->has_session()) {
 
   // This user authenticated.
-  if ($self === '/index.php' || $self === '/') {
+  if ($self === APP_ROOT.'/index.php') {
     // from index
   } else {
     $response->call('go_to_index');
   }
 
-} else if ($self === '/login.php') {
+} else if ($self === APP_ROOT.'/login.php') {
 
   // from login page
 } else {

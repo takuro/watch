@@ -26,11 +26,11 @@ class Response {
   }
 
   public static function go_to_login_form() {
-    header('Location: /login.php');
+    header('Location: login.php');
   }
 
   public static function go_to_index() {
-    header('Location: /index.php');
+    header('Location: index.php');
   }
 
   public static function fatal_error($msg='oops!') {

@@ -54,7 +54,7 @@
         </video>
       </div>
       <nav>
-        <a href="/index.php" id="return">Return</a>
+        <a href="index.php" id="return">Return</a>
       </nav>
     </section>
 

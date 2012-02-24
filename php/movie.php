@@ -102,19 +102,17 @@ class Movie {
   // -- private line --
 
   private function check_movie_exists() {
-    $movies = $this->find_all(false);
-
-    if (empty($movies)) {
-      return true;
-    }
+    $movies_path = $this->get_exists_movies_path();
 
     $this->db->exec("BEGIN DEFERRED;");
-    foreach ($movies as $movie) {
+    $sql = "UPDATE movies SET is_exist=0";
+    $r = $this->db->query($sql, false);
+
+    foreach ($movies_path as $path) {
       $sql = '';
-      if (file_exists($movie['path'])) {
-        $sql .= "UPDATE movies SET is_exist=1 WHERE id=".$movie['id'];
-      } else {
-        $sql .= "UPDATE movies SET is_exist=0 WHERE id=".$movie['id'];
+      $is_exist = $this->find_by_path($path);
+      if ($is_exist && file_exists($path)) {
+        $sql .= "UPDATE movies SET is_exist=1 WHERE id=".$is_exist['id'];
       }
       $r = $this->db->query($sql, false);
       if (!$r) {
