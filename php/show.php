@@ -46,8 +46,8 @@ class Show {
       $size = $file_size - 1;
       $length = $range_end - $range_start +1;
     
-      //header('HTTP/1.1 206 Partial Content');
-      header('HTTP/1.1 200 OK');
+      header('HTTP/1.1 206 Partial Content');
+      //header('HTTP/1.1 200 OK');
       header('Content-type: video/mp4');
       header('Content-Length: ' . $length);
       header('Content-Range: bytes ' . $range . '/' . $file_size);
