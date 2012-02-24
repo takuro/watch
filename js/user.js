@@ -1,7 +1,5 @@
 $(function(){
 
-  var player = new MediaElementPlayer('video,audio');
-
   $('.edittable').editInPlace({
     url: "php/passport.php",
     params: "edit=movie_info",
@@ -28,20 +26,9 @@ $(function(){
     $('.modal-movie-part-number').attr('id', 'movie-part-number_'+movie_id);
     $('.modal-movie-year').attr('id', 'movie-year_'+movie_id);
     $('.modal-movie-description').attr('id', 'movie-description_'+movie_id);
+
     get_movie_info(movie_id);
-
     $('#movie-info').modal('toggle');
-    get_movie(movie_id);
-  });
-
-  function get_movie(movie_id) {
-    //$('#for-mp4-screen').attr('src', 'php/passport.php?session=watchmovie&id=' + movie_id);
-    player.setSrc('php/passport.php?session=watchmovie&id=' + movie_id);
-  }
-
-  $('#watch-movie').on('click', function(){
-    $('#movies').hide('fast');
-    $('#movie-package').show('fast');
   });
 
   function set_movie_info(movie_id, data) {
@@ -69,16 +56,33 @@ $(function(){
     $('#movie-description_'+movie_id).text(data.description);
   }
 
-  // hide screen
-  $('#return').on('click', function(){
-    player.pause();
-    $('#movie-package').hide('fast');
-    $('#movies').show('fast');
-  });
-
   $('#movie-info').on('hidden', function(){
     var movie_id = $('#movie-info').attr('data-movie-id');
     //set_movie_info_to_file(movie_id);
+  });
+
+  function get_movie(movie_id) {
+    $('#for-mp4-screen').attr('src', 'php/passport.php?session=watchmovie&id=' + movie_id);
+    $('#flashvars').attr('value', 'controls=true&file=php/passport.php?session=watchmovie&id=' + movie_id);
+    $('#screen video').mediaelementplayer();
+  }
+
+  // show screen
+  $('#watch-movie').on('click', function(){
+    var movie_id = $('#movie-info').attr('data-movie-id');
+    get_movie(movie_id);
+    $('#movies').hide('fast');
+    $('#movie-package').show('fast');
+  });
+
+  // hide screen
+  $('#return').on('click', function(){
+    $('video').each(function(){$(this)[0].player.pause();});
+    //$('#watch-movie').off('click');
+    //mejs.players[0].setSrc('a');
+
+    //$('#movie-package').hide('fast');
+    //$('#movies').show('fast');
   });
 
   // communicate with server 

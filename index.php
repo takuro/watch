@@ -43,13 +43,9 @@
     <section id="movie-package">
       <div id="screen">
       <video width="<?php echo MOVIE_WIDTH; ?>" height="<?php echo MOVIE_HEIGHT; ?>" controls autobuffer preload="none">
-          <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
           <source id="for-mp4-screen" type="video/mp4" src="" />
-          <!-- Optional: Add subtitles for each language -->
           <track kind="subtitles" src="" srclang="en" />
-          <!-- Optional: Add chapters -->
           <track kind="chapters" src="" srclang="en" /> 
-          <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
           <object width="<?php echo MOVIE_WIDTH; ?>" height="<?php echo MOVIE_HEIGHT; ?>"
                   type="application/x-shockwave-flash" data="vendor/MediaElement/build/flashmediaelement.swf">
               <param name="movie" value="vendor/MediaElement/build/flashmediaelement.swf" />
@@ -58,7 +54,7 @@
         </video>
       </div>
       <nav>
-        <a id="return">Return</a>
+        <a href="/index.php" id="return">Return</a>
       </nav>
     </section>
 
