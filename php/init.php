@@ -44,6 +44,10 @@
     return $_const_movies_dir;
   }
 
+  // movie size (px)
+  define('MOVIE_WIDTH', '720');
+  define('MOVIE_HEIGHT', '480');
+
   /* ---------------------------------------- *
    *  Do not modify anything below this.
    * ---------------------------------------- */

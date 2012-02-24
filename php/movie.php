@@ -23,7 +23,7 @@ class Movie {
     foreach ($movie_path as $movie) {
       if (!$this->find_by_path($movie)) {
         $path = pathinfo($movie);
-        $title = $path['basename'];
+        $title = $path['filename'];
         $ext = $path['extension'];
         $date = "datetime('now','localtime')";
         $sql  = "INSERT INTO movies (".$columns.") VALUES";

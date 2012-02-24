@@ -1,0 +1,47 @@
+Watch（アプリ名）
+=========================
+
+作者
+----
+Takuro Ishii（ isitkr ）
+
+
+Web サイト
+----
+http://isitkr.org/
+
+
+これはなに？
+----
+- 動画プレイヤー（今のところ MP4 形式の動画のみ）
+
+
+動作環境
+----
+PHP 5.4.0RC9-dev
+
+上記環境以外での動作は確認していませんが、
+5.4 特有の機能は利用していません。
+4 系では動かないと思います。
+
+
+インストール
+----
+1. PHP をインストールし、動作する状態にします。
+2. 最新版を https://github.com/takuro/watch からダウンロードします。
+   サーバに git がインストールされているならば、以下のコマンドでもダウンロードできます。
+
+   git clone git://github.com/takuro/watch.git
+
+3. Web サーバの公開ディレクトリに配置します。
+4. MP4 動画ファイルを、サーバの適当なディレクトリに配置します。
+   公開ディレクトリである必要はありません。
+5. php/init.php を環境に合わせて編集します。
+
+
+ライセンス
+----
+MIT License
+http://creativecommons.org/licenses/MIT/
+http://wikipedia.org/wiki/MIT_License
+

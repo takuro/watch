@@ -55,9 +55,6 @@ ul {
   text-align: right;
 }
 
-#screen {
-}
-
 #movie-package {
   display: none;
   } #movie-package nav{
@@ -72,3 +69,7 @@ ul {
   display: none;
 }
 
+.movie a {
+  padding: 10px 0;
+  padding-bottom: 15px;
+}

@@ -29,10 +29,10 @@
     <?php
       $count = 1;
       foreach ($movie->find_all() as $m) {
-        echo '<div class="span2">';
+        echo '<div class="span2 movie">';
         echo '  <a class="movie-action" data-movie-id="'.$m['id'].'"';
         echo '     data-movie-title="'.$m['title'].' '.$m['part_number'].'" id="movie-'.$m['id'].'">';
-        echo      $m['title'];
+        echo      $m['title'].' '.$m['part_number'];
         echo '  </a>';
         echo '</div>';
       }
@@ -41,7 +41,7 @@
 
     <section id="movie-package">
       <div id="screen">
-        <video width="720" height="480" controls autobuffer preload="none">
+      <video width="<?php echo MOVIE_WIDTH; ?>" height="<?php echo MOVIE_HEIGHT; ?>" controls autobuffer preload="none">
           <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
           <source id="for-mp4-screen" type="video/mp4" src="" />
           <!-- Optional: Add subtitles for each language -->
@@ -49,7 +49,8 @@
           <!-- Optional: Add chapters -->
           <track kind="chapters" src="" srclang="en" /> 
           <!-- Flash fallback for non-HTML5 browsers without JavaScript -->
-          <object width="720" height="480" type="application/x-shockwave-flash" data="vendor/MediaElement/build/flashmediaelement.swf">
+          <object width="<?php echo MOVIE_WIDTH; ?>" height="<?php echo MOVIE_HEIGHT; ?>"
+                  type="application/x-shockwave-flash" data="vendor/MediaElement/build/flashmediaelement.swf">
               <param name="movie" value="vendor/MediaElement/build/flashmediaelement.swf" />
               <param name="flashvars" value="controls=true&file=" />
           </object>
